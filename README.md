@@ -34,3 +34,22 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+            {/* <form>
+                <div className="grid w-full items-center gap-4">
+                    <div className="flex flex-col space-y-1.5">
+                        <Label htmlFor="name">First Name</Label>
+                        <Input id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Student 1st name" />
+                    </div>
+                    <div className="flex flex-col space-y-1.5">
+                        <Label htmlFor="name">Last Name</Label>
+                        <Input id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Student last name" />
+                    </div>
+                    <div className="flex flex-col space-y-1.5">
+                        <Label htmlFor="name">Age</Label>
+                        <Input type="number" id="age"  placeholder="Student Age" value={age === 0 ? 0 : age} onChange={handleAgeChange} />
+                    </div>
+                </div>
+            </form> */}

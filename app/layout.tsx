@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import 'animate.css';
 import { Suspense } from "react";
 import Loading from "@/components/Loading";
 
@@ -20,8 +21,8 @@ export const metadata: Metadata = {
 };
 
 const DelayedComponent = () => {
-  const delay = new Promise((resolve) => setTimeout(resolve, 9000));
-  return delay.then(() => <div>Loaded!</div>);
+  const delay = new Promise((resolve) => setTimeout(resolve, 3000));
+  return delay.then(() => <div></div>);
 };
 
 

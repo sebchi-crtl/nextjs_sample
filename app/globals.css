@@ -70,3 +70,51 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.animate-circle-1 {
+  animation: fade 1.5s infinite;
+}
+
+.animate-circle-2 {
+  animation: fade2 1.5s infinite;
+}
+
+.animate-circle-3 {
+  animation: fade3 1.5s infinite;
+}
+
+@keyframes fade {
+  0% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+@keyframes fade2 {
+  0% {
+      opacity: 0;
+  }
+  50% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+}
+
+@keyframes fade3 {
+  0% {
+      opacity: 0;
+  }
+  50% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+}
