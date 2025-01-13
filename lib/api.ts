@@ -1,6 +1,9 @@
 export const api = {
-    fetchStudents: async () => {
-      const response = await fetch('/api/students');
+    fetchStudents: async (): Promise<Student[]> => {
+      const response = await fetch('/api/students', {
+        method: 'GET',
+      });
+      console.log("fetch", response);
       return response.json();
     },
   
