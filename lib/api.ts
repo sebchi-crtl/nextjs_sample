@@ -1,3 +1,10 @@
+import { Student } from "@/app/type";
+
+type Students = {
+  firstName: string;
+  lastName: string;
+  age: number;
+}
 export const api = {
     fetchStudents: async (): Promise<Student[]> => {
       const response = await fetch('/api/students', {
@@ -7,7 +14,7 @@ export const api = {
       return response.json();
     },
   
-    createStudent: async (data: Student): Promise<Student> => {
+    createStudent: async (data: Students): Promise<Students> => {
       const response = await fetch('/api/students', {
         method: 'POST',
         headers: {

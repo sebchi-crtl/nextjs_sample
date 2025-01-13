@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
@@ -56,11 +56,11 @@ export default function FormCard() {
     // });
     const mutation = useMutation({
         mutationFn: api.createStudent,
-        onSuccess: (data: any) => {
+        onSuccess: (data) => {
             console.log('Student created:', data);
             form.reset();
         },
-        onError: (error: any) => {
+        onError: (error) => {
             console.error('Error creating student:', error);
         },
     });

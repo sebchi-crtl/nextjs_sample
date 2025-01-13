@@ -2,15 +2,13 @@
 
 import { columns } from '@/components/columns';
 import { DataTable } from '@/components/DataTable';
-import { Button } from '@/components/ui/button';
-import { Table } from '@/components/ui/table';
 import { api } from '@/lib/api';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useQuery} from '@tanstack/react-query';
+import { Student } from '../type';
 
 export function TableList() {
-  const [selectedStudent, setSelectedStudent] = useState<any>(null);
-  const [bulkDeleteIds, setBulkDeleteIds] = useState<number[]>([]);
+  // const [selectedStudent, setSelectedStudent] = useState<any>(null);
+  // const [bulkDeleteIds, setBulkDeleteIds] = useState<number[]>([]);
 
   const useStudents = () => {
     return useQuery<Student[]>({
@@ -31,9 +29,9 @@ export function TableList() {
 //     bulkDeleteMutation.mutate(bulkDeleteIds);
 //   };
 
-  const handleDelete = (id: number) => {
-    api.deleteStudent(id);
-  };
+  // const handleDelete = (id: number) => {
+  //   api.deleteStudent(id);
+  // };
 
   return (
     <>

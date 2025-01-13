@@ -26,9 +26,9 @@ export async function DELETE(request: Request) {
   return NextResponse.json({ message: 'Students deleted successfully' });
 }
 
-export async function GET_BY_ID({ params }: { params: { id: string } }) {
-  const student = await prisma.student.findUnique({
-    where: { id: Number(params.id) },
-  });
-  return NextResponse.json(student);
-}
+// export async function GET_BY_ID({ params }: { params: { id: string } }) {
+//   const student = await prisma.student.findUnique({
+//     where: { id: Number(params.id) },
+//   });
+//   return NextResponse.json(student);
+// }

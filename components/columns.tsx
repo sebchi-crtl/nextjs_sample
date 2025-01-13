@@ -3,8 +3,9 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { Checkbox } from "./ui/checkbox"
 import { Button } from "./ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
+import { Student } from "@/app/type"
 
 
 export const columns: ColumnDef<Student>[] = [
