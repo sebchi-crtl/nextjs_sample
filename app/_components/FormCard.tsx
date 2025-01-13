@@ -7,28 +7,15 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { api } from "@/lib/api";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+// const createStudent = async (data: Student): Promise<Student[]> => {
+//     const response = await axios.post('/api/students', data);
+//     return response.data;
+// };
 
 export default function FormCard() {
-
-    // const [firstName, setFirstName] = useState<string>("");
-    // const [lastName, setLastName] = useState<string>("");
-    // const [age, setAge] = useState<number>(0);
-
-    // const clearForm = () => {
-    //     setFirstName("");
-    //     setLastName("");
-    //     setAge(0);
-    // };
-
-    // const handleAgeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    //     const value = e.target.value;
-    //     if (value === "" || !isNaN(Number(value))) {
-    //         setAge(value === "" ? 0 : Number(value));
-    //     }
-    // };
     const formSchema = z.object({
         firstName: z.string().min(2, {
             message: "first name must be at least 2 characters.",
@@ -57,15 +44,30 @@ export default function FormCard() {
             age: 0,
         },
       })
-      const queryClient = useQueryClient();
-    
-      const createStudentMutation = useMutation(api.createStudent, {
-        onSuccess: () => queryClient.invalidateQueries(['students']),
-      });
-    
+      
+    // const mutation = useMutation(createStudent, {
+    //     onSuccess: (data: any) => {
+    //         console.log('Student created:', data);
+    //         form.reset();
+    //     },
+    //     onError: (error: any) => {
+    //         console.error('Error creating student:', error);
+    //     },
+    // });
+    const mutation = useMutation({
+        mutationFn: api.createStudent,
+        onSuccess: (data: any) => {
+            console.log('Student created:', data);
+            form.reset();
+        },
+        onError: (error: any) => {
+            console.error('Error creating student:', error);
+        },
+    });
+
     function onSubmit(data: z.infer<typeof formSchema>) {
         console.log("values")
-        createStudentMutation.mutate(data);
+        mutation.mutate(data);
         console.log(data)
     }
     return (

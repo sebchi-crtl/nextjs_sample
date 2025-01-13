@@ -4,11 +4,19 @@ export const api = {
       return response.json();
     },
   
-    createStudent: async (data: any) => {
+    createStudent: async (data: Student): Promise<Student> => {
       const response = await fetch('/api/students', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(data),
       });
+
+      if (!response.ok) {
+        throw new Error('Error creating student');
+      }
+      console.log("man", response);
       return response.json();
     },
   
