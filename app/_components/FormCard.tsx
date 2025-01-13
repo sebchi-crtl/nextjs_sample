@@ -2,44 +2,52 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useState } from "react";
+import { api } from "@/lib/api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function FormCard() {
 
-    const [firstName, setFirstName] = useState<string>("");
-    const [lastName, setLastName] = useState<string>("");
-    const [age, setAge] = useState<number>(0);
+    // const [firstName, setFirstName] = useState<string>("");
+    // const [lastName, setLastName] = useState<string>("");
+    // const [age, setAge] = useState<number>(0);
 
-    const clearForm = () => {
-        setFirstName("");
-        setLastName("");
-        setAge(0);
-    };
+    // const clearForm = () => {
+    //     setFirstName("");
+    //     setLastName("");
+    //     setAge(0);
+    // };
 
-    const handleAgeChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        // Check if the value is a valid number or empty (allow clearing the field)
-        if (value === "" || !isNaN(Number(value))) {
-            setAge(value === "" ? 0 : Number(value));
-        }
-    };
+    // const handleAgeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    //     const value = e.target.value;
+    //     if (value === "" || !isNaN(Number(value))) {
+    //         setAge(value === "" ? 0 : Number(value));
+    //     }
+    // };
     const formSchema = z.object({
         firstName: z.string().min(2, {
             message: "first name must be at least 2 characters.",
         }),
         lastName: z.string().min(2, {
-            message: "last name must be at least 2 character"
+            message: "last name must be at least 2 character",
         }),
-        age: z.number({
-            required_error: "Age is required",
-            invalid_type_error: "Age must be a number"
-        })
+        age: z 
+            .string()
+            .refine((value) => !isNaN(Number(value)), {
+                message: "Age must be a valid number",
+            })
+            .transform((value) => {
+                const numValue = Number(value);
+                if (isNaN(numValue)) {
+                    throw new Error("Invalid number");
+                }
+                return numValue; // Transform to number
+            }),
     })
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -49,13 +57,17 @@ export default function FormCard() {
             age: 0,
         },
       })
-     
-      // 2. Define a submit handler.
-      function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
-      }
+      const queryClient = useQueryClient();
+    
+      const createStudentMutation = useMutation(api.createStudent, {
+        onSuccess: () => queryClient.invalidateQueries(['students']),
+      });
+    
+    function onSubmit(data: z.infer<typeof formSchema>) {
+        console.log("values")
+        createStudentMutation.mutate(data);
+        console.log(data)
+    }
     return (
         <Card className="w-[350px] !border-none !shadow-none">
             <CardHeader>
@@ -104,7 +116,7 @@ export default function FormCard() {
                     <FormItem>
                     <FormLabel>Age</FormLabel>
                     <FormControl>
-                        <Input placeholder="Student age name" id="age" {...field} />
+                        <Input type="number" placeholder="Student age name" {...field} />
                     </FormControl>
                     <FormMessage />
                     </FormItem>

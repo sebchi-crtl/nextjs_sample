@@ -4,6 +4,7 @@ import "./globals.css";
 import 'animate.css';
 import { Suspense } from "react";
 import Loading from "@/components/Loading";
+import Query from "@/lib/query/queryProvider"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,10 +37,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Suspense fallback={<Loading />}>
-          <DelayedComponent />
-          {children}
-        </Suspense>
+        <Query>
+          <Suspense fallback={<Loading />}>
+            <DelayedComponent />
+            {children}
+          </Suspense>
+        </Query>
       </body>
     </html>
   );
