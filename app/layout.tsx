@@ -5,6 +5,8 @@ import 'animate.css';
 import { Suspense } from "react";
 import Loading from "@/components/Loading";
 import Query from "@/lib/query/queryProvider"
+import { WagmiProvider } from "wagmi";
+import { config } from "@/lib/config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,12 +39,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <WagmiProvider config={config}>
         <Query>
           <Suspense fallback={<Loading />}>
             <DelayedComponent />
             {children}
           </Suspense>
         </Query>
+        </WagmiProvider>
       </body>
     </html>
   );
