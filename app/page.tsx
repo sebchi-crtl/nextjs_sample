@@ -6,6 +6,8 @@ import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
 import FormCard from "./_components/FormCard";
 import { TableList } from "./_components/TableList";
+import { MenuBar } from "@/components/MenuBar";
+import { NavigationMenuTab } from "@/components/NavigationMenuTab";
 
 export default function Home() {
   const [isFormCardVisible, setIsFormCardVisible] = useState(false);
@@ -30,7 +32,8 @@ export default function Home() {
   }, []);
   
   return (
-    <div className="flex min-h-screen w-full items-center justify-center">
+    <div className="flex min-h-screen w-full items-center justify-center flex-col gap-10 mt-7">
+      <NavigationMenuTab />
       <div className="flex items-center space-x-4 text-sm bg-gray-100 p-10 border border-lg rounded-xl">
         <div className="bg-slate-50 p-3">
           {!isFormCardVisible ? <SkeletonCard /> : <FormCard />}
